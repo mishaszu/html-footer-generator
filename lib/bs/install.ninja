@@ -1,0 +1,18 @@
+rescript = 1
+rule cp
+  command = cp $i $out
+rule touch
+ command = touch $out
+o app.cmi : cp ../bs/src/app.cmi
+o app.cmj : cp ../bs/src/app.cmj
+o app.cmt : cp ../bs/src/app.cmt
+o app.res : cp ../../src/app.res
+o index.cmi : cp ../bs/src/index.cmi
+o index.cmj : cp ../bs/src/index.cmj
+o index.cmt : cp ../bs/src/index.cmt
+o index.res : cp ../../src/index.res
+o footer.cmi : cp ../bs/src/footer.cmi
+o footer.cmj : cp ../bs/src/footer.cmj
+o footer.cmt : cp ../bs/src/footer.cmt
+o footer.res : cp ../../src/footer.res
+build install.stamp : touch app.cmi app.cmj index.cmi index.cmj footer.cmi footer.cmj 

@@ -1,0 +1,20 @@
+rescript = 1
+g_finger := /home/mishaszu/Mike/learn/frontend/html-footer-generator/node_modules/@rescript/react/lib/ocaml/install.stamp
+rule astj
+  command = /home/mishaszu/Mike/learn/frontend/html-footer-generator/node_modules/rescript/linux/bsc.exe  -bs-v 10.1.4 -bs-jsx 4 -bs-jsx-mode classic  -absname -bs-ast -o $out $i
+o src/app.ast : astj ../../src/app.res
+rule deps
+  command = /home/mishaszu/Mike/learn/frontend/html-footer-generator/node_modules/rescript/linux/bsb_helper.exe -hash e44695aaa2c9df9fd377cd3440523dac $in
+  restat = 1
+o src/app.d : deps src/app.ast
+rule mij
+  command = /home/mishaszu/Mike/learn/frontend/html-footer-generator/node_modules/rescript/linux/bsc.exe -I src -I /home/mishaszu/Mike/learn/frontend/html-footer-generator/node_modules/@rescript/react/lib/ocaml   -bs-package-name footer-generator -bs-package-output es6:$in_d:.bs.js -bs-v $g_finger $i
+  dyndep = 1
+  restat = 1
+o src/app.cmj src/app.cmi ../../src/app.bs.js : mij src/app.ast
+o src/index.ast : astj ../../src/index.res
+o src/index.d : deps src/index.ast
+o src/index.cmj src/index.cmi ../../src/index.bs.js : mij src/index.ast
+o src/footer.ast : astj ../../src/footer.res
+o src/footer.d : deps src/footer.ast
+o src/footer.cmj src/footer.cmi ../../src/footer.bs.js : mij src/footer.ast
